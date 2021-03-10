@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easymall.mapper.MallCartMapper">
+
+	<select id="selectMallCartByUserId" resultType="com.easymall.pojo.MallCartPOJO">
+		SELECT
+			cart_id cartId,
+			user_id userId,
+			goods_id goodsId,
+			quantity quantity,
+			checked checked,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_cart
+		WHERE user_id=#{userId}
+	</select>
+
+	<delete id="deleteMallCartByCartIds" parameterType="java.lang.String">
+		DELETE  FROM  mall_cart
+		WHERE cart_id IN
+		<foreach collection="array" item="cartId" open="(" separator="," close=")">
+			#{cartId}
+		</foreach>
+	</delete>
+
+
+	<update id="updateMallCartByCartId" >
+      UPDATE mall_cart SET checked=#{checked},update_time=NOW()
+             WHERE  cart_id=#{cartId}
+	</update>
+
+
+	<insert id="insertMallCart" parameterType="list">
+		INSERT INTO mall_cart (cart_id, user_id, goods_id, quantity, checked, create_time, update_time)
+		VALUES
+		<foreach collection="list" separator="," item="info">
+			(UUID(), #{info.userId}, #{info.goodsId}, #{info.quantity}, #{info.checked}, NOW(), NOW())
+		</foreach>
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easymall.mapper.SysUserMapper">
+
+	<select id="login" resultType="com.easymall.pojo.SysUserPOJO">
+		SELECT
+			user_id  userId,
+			login_name loginName,
+			`password` ,
+			user_name userName,
+			user_type userType,
+			email ,
+			phone,
+			sex,
+			`status`,
+			create_time createTime,
+			remark
+		  FROM
+			sys_user
+		  WHERE login_name=#{loginName} AND  password=#{password} limit 1
+	</select>
+
+	<select id="selectUserByLoginName" resultType="com.easymall.pojo.SysUserPOJO">
+		SELECT
+			user_id  userId,
+			login_name loginName,
+			`password` ,
+			user_name userName,
+			user_type userType,
+			email ,
+			phone,
+			sex,
+			`status`,
+			create_time createTime,
+			remark
+		  FROM
+			sys_user
+		  WHERE login_name=#{loginName} limit 1
+	</select>
+
+
+	<select id="selectUserByUserName" resultType="com.easymall.pojo.SysUserPOJO">
+		SELECT
+			user_id  userId,
+			login_name loginName,
+			`password` ,
+			user_name userName,
+			user_type userType,
+			email ,
+			phone,
+			sex,
+			`status`,
+			create_time createTime,
+			remark
+		  FROM
+			sys_user
+		  WHERE user_name  like CONCAT('%',#{userName},'%')
+	</select>
+
+
+	<insert id="addUser" parameterType="com.easymall.pojo.SysUserPOJO">
+	 insert into sys_user (user_id,login_name,password,user_name,sex,user_type,email,phone,status,create_time,remark)
+                     values (uuid(), #{loginName}, #{password},#{userName},#{sex},#{userType},#{email},#{phone},#{status},NOW(),#{remark})
+	</insert>
+
+
+	<select id="selectUser" resultType="com.easymall.pojo.SysUserPOJO">
+		SELECT
+			user_id  userId,
+			login_name loginName,
+			`password` ,
+			user_name userName,
+			user_type userType,
+			email ,
+			phone,
+			sex,
+			`status`,
+			create_time createTime,
+			remark
+		  FROM
+			sys_user
+	</select>
+
+
+	<delete id="deleteUserByUserId" parameterType="java.lang.String">
+	     DELETE  FROM  sys_user
+	     WHERE user_id IN
+		<foreach collection="array" item="userId" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+
+</mapper>

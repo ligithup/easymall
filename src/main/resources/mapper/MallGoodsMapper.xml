@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easymall.mapper.MallGoodsMapper">
+
+
+
+	<insert id="insertGoods" parameterType="com.easymall.pojo.MallGoodsPOJO">
+	 insert into mall_goods (goods_id,goods_name,brand,cate,price,original,tags,content,summary,status,goods_main_image,goods_sub_images,create_time,update_time,user_id)
+                     values (uuid(), #{goodsName}, #{brand},#{cate},#{price},#{original},#{tags},#{content},#{summary},#{status},#{goodsMainImage},#{goodsSubImages},NOW(),NOW(),#{userId})
+	</insert>
+
+	<update id="updateGoods" parameterType="com.easymall.pojo.MallGoodsPOJO">
+      UPDATE mall_goods SET goods_name=#{goodsName} ,brand=#{brand},cate=#{cate},price=#{price},original=#{original},tags=#{tags},
+             content=#{content},summary=#{summary},status=#{status},goods_main_image=#{goodsMainImage},goods_sub_images=#{goodsSubImages},update_time=NOW()
+             WHERE  goods_id=#{goodsId}
+	</update>
+
+	<update id="updateGoodsStatus" >
+      UPDATE mall_goods SET status=#{status},update_time=NOW()
+             WHERE  goods_id=#{goodsId}
+	</update>
+
+	<select id="selectGoods" resultType="com.easymall.pojo.MallGoodsPOJO">
+		SELECT
+			goods_id goodsId,
+			goods_name goodsName,
+			brand brand,
+			cate cate,
+			price price,
+			original original,
+			tags tags,
+			content content,
+			summary summary,
+			status status,
+			goods_main_image goodsMainImage,
+			goods_sub_images goodsSubImages,
+			create_time createTime,
+			update_time updateTime,
+			user_id userId
+		FROM
+			mall_goods
+	</select>
+
+
+	<select id="selectGoodsByUserId" resultType="com.easymall.pojo.MallGoodsPOJO">
+		SELECT
+			goods_id goodsId,
+			goods_name goodsName,
+			brand brand,
+			cate cate,
+			price price,
+			original original,
+			tags tags,
+			content content,
+			summary summary,
+			status status,
+			goods_main_image goodsMainImage,
+			goods_sub_images goodsSubImages,
+			create_time createTime,
+			update_time updateTime,
+			user_id userId
+		FROM
+			mall_goods
+		WHERE user_id=#{userId}
+	</select>
+
+
+	<select id="selectGoodsByGoodsName" resultType="com.easymall.pojo.MallGoodsPOJO">
+		SELECT
+			goods_id goodsId,
+			goods_name goodsName,
+			brand brand,
+			cate cate,
+			price price,
+			original original,
+			tags tags,
+			content content,
+			summary summary,
+			status status,
+			goods_main_image goodsMainImage,
+			goods_sub_images goodsSubImages,
+			create_time createTime,
+			update_time updateTime,
+			user_id userId
+		FROM
+			mall_goods
+		WHERE goods_name like CONCAT('%',#{goodsName},'%')
+
+	</select>
+
+	<select id="selectGoodsByGoodsId" resultType="com.easymall.pojo.MallGoodsPOJO">
+		SELECT
+			goods_id goodsId,
+			goods_name goodsName,
+			brand brand,
+			cate cate,
+			price price,
+			original original,
+			tags tags,
+			content content,
+			summary summary,
+			status status,
+			goods_main_image goodsMainImage,
+			goods_sub_images goodsSubImages,
+			create_time createTime,
+			update_time updateTime,
+			user_id userId
+		FROM
+			mall_goods
+		WHERE goods_id=#{goodsId}
+	</select>
+
+	<delete id="deleteGoodsByGoodsId" parameterType="java.lang.String">
+		DELETE  FROM  mall_goods
+		WHERE goods_id IN
+		<foreach collection="array" item="goodsId" open="(" separator="," close=")">
+			#{goodsId}
+		</foreach>
+	</delete>
+
+
+</mapper>

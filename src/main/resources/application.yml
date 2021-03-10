@@ -1,0 +1,55 @@
+server:
+  port: 9000
+
+
+# MyBatis
+mybatis:
+  # \u641C\u7D22\u6307\u5B9A\u5305\u522B\u540D
+  type-aliases-package: com.easymall
+  # \u914D\u7F6Emapper\u7684\u626B\u63CF\uFF0C\u627E\u5230\u6240\u6709\u7684mapper.xml\u6620\u5C04\u6587\u4EF6
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  #\u5F00\u542FMybatis\u4E0B\u5212\u7EBF\u547D\u540D\u8F6C\u9A7C\u5CF0\u547D\u540D
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+pagehelper:
+  helperDialect:  mysql
+  reasonable: true
+  supportMethodsArguments:  true
+  params: count=countSql
+
+
+swagger:
+  #production: true #配置此属性后,所有资源都会屏蔽输出.
+  basic:
+    enable: false
+#    username: admin
+#    password: 123456
+
+spring:
+  datasource:
+    druid:
+      url:  jdbc:mysql://localhost:3306/easy_mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      username:  root
+      password:  root
+      initial-size:  10
+      max-active:  50
+      min-idle:  10
+      max-wait:  60000
+      pool-prepared-statements:  true
+      max-pool-prepared-statement-per-connection-size:  20
+      validation-query:  SELECT 1 FROM DUAL
+      test-on-borrow:  false
+      test-on-return:  false
+      test-while-idle:  true
+      time-between-eviction-runs-millis:  60000
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: false
+      filter:
+        stat:
+          enabled: false

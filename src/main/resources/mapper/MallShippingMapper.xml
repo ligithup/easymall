@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easymall.mapper.MallShippingMapper">
+
+
+
+	<select id="selectMallShippingByUserId" resultType="com.easymall.pojo.MallShippingPOJO">
+		SELECT
+			ship_id shipId,
+			user_id userId,
+			receiver_name receiverName,
+			receiver_phone receiverPhone,
+			receiver_province receiverProvince,
+			receiver_city receiverCity,
+			receiver_district receiverDistrict,
+			receiver_address receiverAddress,
+			receiver_zip receiverZip,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_shipping
+		WHERE user_id=#{userId}
+	</select>
+
+
+	<delete id="deleteMallShippingByShipIds" parameterType="java.lang.String">
+		DELETE  FROM  mall_shipping
+		WHERE ship_id IN
+		<foreach collection="array" item="shipId" open="(" separator="," close=")">
+			#{shipId}
+		</foreach>
+	</delete>
+
+
+	<update id="updateMallShippingByShipId" parameterType="com.easymall.pojo.MallShippingPOJO">
+      UPDATE mall_shipping SET user_id=#{userId},receiver_name=#{receiverName},receiver_phone=#{receiverPhone},receiver_province=#{receiverProvince},receiver_city=#{receiverCity},receiver_district=#{receiverDistrict},receiver_address=#{receiverAddress},receiver_zip=#{receiverZip},update_time=NOW()
+             WHERE  ship_id=#{shipId}
+	</update>
+
+
+	<insert id="insertMallShipping" parameterType="com.easymall.pojo.MallShippingPOJO">
+	 insert into mall_shipping (ship_id,user_id,receiver_name,receiver_phone,receiver_province,receiver_city,receiver_district,receiver_address,receiver_zip,create_time,update_time)
+                     values (uuid(), #{userId}, #{receiverName},#{receiverPhone},#{receiverProvince},#{receiverCity},#{receiverDistrict},#{receiverAddress},#{receiverZip},NOW(),NOW())
+	</insert>
+</mapper>

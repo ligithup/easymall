@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easymall.mapper.MallOrderMapper">
+
+
+	<select id="selectMallOrderByUserId" resultType="com.easymall.pojo.MallOrderPOJO">
+		SELECT
+			order_id orderId,
+			user_id userId,
+			goods_id goodsId,
+			payment payment,
+			payment_type paymentType,
+			postage postage,
+			`status`,
+			payment_time paymentTime,
+			send_time sendTime,
+			end_time endTime,
+			close_time closeTime,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_order
+		WHERE user_id=#{userId}
+	</select>
+
+
+	<select id="selectMallOrderAll" resultType="com.easymall.pojo.MallOrderPOJO">
+		SELECT
+			order_id orderId,
+			user_id userId,
+			goods_id goodsId,
+			payment payment,
+			payment_type paymentType,
+			postage postage,
+			`status`,
+			payment_time paymentTime,
+			send_time sendTime,
+			end_time endTime,
+			close_time closeTime,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_order
+	</select>
+
+	<select id="selectMallOrderItemByUserId" resultType="com.easymall.pojo.MallOrderItemPOJO">
+		SELECT
+			order_item_id orderItemId,
+			user_id userId,
+			order_id orderId,
+			goods_id goodsId,
+			current_unit_price currentUnitPrice,
+			quantity quantity,
+			total_price totalPrice,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_order_item
+		WHERE user_id=#{userId}
+	</select>
+
+	<select id="selectMallOrderItemByOrderId" resultType="com.easymall.pojo.MallOrderItemPOJO">
+		SELECT
+			order_item_id orderItemId,
+			user_id userId,
+			order_id orderId,
+			goods_id goodsId,
+			current_unit_price currentUnitPrice,
+			quantity quantity,
+			total_price totalPrice,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_order_item
+		WHERE order_id=#{orderId}
+	</select>
+
+	<delete id="deleteMallOrderByOrderIds" parameterType="java.lang.String">
+		DELETE  FROM  mall_order
+		WHERE order_id IN
+		<foreach collection="array" item="orderId" open="(" separator="," close=")">
+			#{orderId}
+		</foreach>
+	</delete>
+
+	<delete id="deleteMallOrderItemByOrderItemIds" parameterType="java.lang.String">
+		DELETE  FROM  mall_order_item
+		WHERE order_item_id IN
+		<foreach collection="array" item="orderItemId" open="(" separator="," close=")">
+			#{orderItemId}
+		</foreach>
+	</delete>
+
+	<update id="updateMallOrder" parameterType="com.easymall.pojo.MallOrderPOJO">
+      UPDATE mall_order SET user_id=#{userId},goods_id=#{goodsId},payment=#{payment},payment_type=#{paymentType},postage=#{postage},status=#{status},payment_time=#{paymentTime},send_time=#{sendTime},end_time=#{endTime},close_time=#{closeTime},update_time=NOW()
+             WHERE  order_id=#{orderId}
+	</update>
+
+	<update id="updateMallOrderItem" parameterType="com.easymall.pojo.MallOrderItemPOJO">
+      UPDATE mall_order_item SET user_id=#{userId},order_id=#{orderId},goods_id=#{goodsId},current_unit_price=#{currentUnitPrice},quantity=#{quantity},total_price=#{totalPrice},update_time=NOW()
+             WHERE  order_item_id=#{orderItemId}
+	</update>
+
+	<insert id="insertMallOrder" parameterType="list">
+		INSERT INTO mall_order (order_id, user_id, goods_id, payment, payment_type,postage,status,payment_time,send_time,end_time,close_time, create_time, update_time)
+		VALUES
+		<foreach collection="list" separator="," item="info">
+			(UUID(), #{info.userId}, #{info.goodsId}, #{info.payment}, #{info.paymentType}, #{info.postage}, #{info.status}, #{info.paymentTime}, #{info.sendTime}, #{info.endTime}, #{info.closeTime}, NOW(), NOW())
+		</foreach>
+	</insert>
+
+	<insert id="insertMallOrderItem" parameterType="list">
+		INSERT INTO mall_order_item (order_item_id, user_id, order_id, goods_id, current_unit_price,quantity,total_price,create_time, update_time)
+		VALUES
+		<foreach collection="list" separator="," item="info">
+			(UUID(), #{info.userId}, #{info.orderId}, #{info.goodsId}, #{info.currentUnitPrice}, #{info.quantity}, #{info.totalPrice}, NOW(), NOW())
+		</foreach>
+	</insert>
+
+
+
+</mapper>
