@@ -33,5 +33,7 @@ public interface MallOrderMapper {
 
     int deleteMallOrderByOrderIds(String[] orderIds);
 
+    MallOrderPOJO selectMallOrderByOrderId(@Param("orderId") String orderId);
 
+    MallOrderItemPOJO selectMallOrderItemByOrderItemId(@Param("orderItemId") String orderItemId);
 }

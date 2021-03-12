@@ -36,4 +36,8 @@ public class MallShippingService {
     public int insertMallShipping(MallShippingPOJO mallShipping) {
         return mallShippingMapper.insertMallShipping(mallShipping);
     }
+
+    public MallShippingPOJO selectMallShippingByShipId(String shipId) {
+        return mallShippingMapper.selectMallShippingByShipId(shipId);
+    }
 }

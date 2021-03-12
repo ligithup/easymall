@@ -17,8 +17,6 @@ public class MallOrderPOJO implements Serializable {
     private String orderId;
     @ApiModelProperty("用户ID")
     private String userId;
-    @ApiModelProperty("商品ID")
-    private String goodsId;
     @ApiModelProperty("实际付款金额,单位是元,保留两位小数")
     private String payment;
     @ApiModelProperty("支付类型,1-在线支付")

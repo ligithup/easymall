@@ -20,4 +20,5 @@ public interface MallShippingMapper {
 
     int insertMallShipping(MallShippingPOJO mallShipping);
 
+    MallShippingPOJO selectMallShippingByShipId(@Param("shipId") String shipId);
 }

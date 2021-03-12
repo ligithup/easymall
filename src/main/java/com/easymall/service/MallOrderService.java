@@ -68,4 +68,14 @@ public class MallOrderService {
 
         return mallOrderMapper.deleteMallOrderByOrderIds(orderIds);
     }
+
+    public MallOrderPOJO selectMallOrderByOrderId(String orderId) {
+
+        return mallOrderMapper.selectMallOrderByOrderId(orderId);
+    }
+
+    public MallOrderItemPOJO selectMallOrderItemByOrderItemId(String orderItemId) {
+
+        return mallOrderMapper.selectMallOrderItemByOrderItemId(orderItemId);
+    }
 }

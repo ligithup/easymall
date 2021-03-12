@@ -46,7 +46,14 @@ public class MallOrderController extends BaseController {
         List<MallOrderPOJO> mallOrderList=mallOrderService.selectMallOrderByUserId(userId);
         return getDataTable(mallOrderList);
     }
+    @PostMapping("/selectMallOrderByOrderId")
+    @ApiOperation(value="通过订单ID查询订单信息", notes="通过订单ID查询订单信息")
+    public ResultUtil selectMallOrderByOrderId(String orderId){
 
+        MallOrderPOJO mallOrder=mallOrderService.selectMallOrderByOrderId(orderId);
+
+        return ResultUtil.success(mallOrder);
+    }
 
 
     @PostMapping("/insertMallOrder")
@@ -77,6 +84,14 @@ public class MallOrderController extends BaseController {
         startPage();
         List<MallOrderItemPOJO> mallOrderItemList=mallOrderService.selectMallOrderItemByUserId(userId);
         return getDataTable(mallOrderItemList);
+    }
+
+    @PostMapping("/selectMallOrderItemByOrderItemId")
+    @ApiOperation(value="通过订单明细ID查询订单明细信息", notes="通过订单明细ID查询订单明细信息")
+    public ResultUtil selectMallOrderItemByOrderItemId(String orderItemId){
+
+        MallOrderItemPOJO mallOrderItem=mallOrderService.selectMallOrderItemByOrderItemId(orderItemId);
+        return ResultUtil.success(mallOrderItem);
     }
 
     @PostMapping("/selectMallOrderItemByOrderId")

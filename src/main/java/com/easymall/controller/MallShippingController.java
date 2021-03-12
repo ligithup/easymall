@@ -37,6 +37,14 @@ public class MallShippingController extends BaseController {
         return getDataTable(MallShippingList);
     }
 
+    @PostMapping("/selectMallShippingByShipId")
+    @ApiOperation(value="通过收货ID查询收货地址", notes="通过收货ID查询收货地址")
+    public ResultUtil selectMallShippingByShipId(String shipId){
+
+        MallShippingPOJO mallShipping=mallShippingService.selectMallShippingByShipId(shipId);
+        return ResultUtil.success(mallShipping);
+    }
+
     @PostMapping("/deleteMallShippingByShipId")
     @ApiOperation(value="通过shipId删除收货地址", notes="通过shipId删除收货地址")
     public ResultUtil deleteMallShippingByShipIds(String[] shipIds){

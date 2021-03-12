@@ -22,6 +22,24 @@
 		WHERE user_id=#{userId}
 	</select>
 
+	<select id="selectMallShippingByShipId" resultType="com.easymall.pojo.MallShippingPOJO">
+		SELECT
+			ship_id shipId,
+			user_id userId,
+			receiver_name receiverName,
+			receiver_phone receiverPhone,
+			receiver_province receiverProvince,
+			receiver_city receiverCity,
+			receiver_district receiverDistrict,
+			receiver_address receiverAddress,
+			receiver_zip receiverZip,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_shipping
+		WHERE ship_id=#{shipId}
+	</select>
+
 
 	<delete id="deleteMallShippingByShipIds" parameterType="java.lang.String">
 		DELETE  FROM  mall_shipping
