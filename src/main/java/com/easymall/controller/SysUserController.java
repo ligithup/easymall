@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -87,7 +88,7 @@ public class SysUserController extends BaseController {
 
     @PostMapping("deleteUserByUserId")
     @ApiOperation(value="通过用户id删除用户", notes="通过用户id删除用户")
-    public ResultUtil deleteUserByUserId(String[] userIds){
+    public ResultUtil deleteUserByUserId(@RequestBody String[] userIds){
 
         int i= sysUserService.deleteUserByUserId(userIds);
         if(i==0){

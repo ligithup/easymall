@@ -125,7 +125,7 @@ public class MallOrderController extends BaseController {
 
     @PostMapping("/deleteMallOrderItemByOrderItemIds")
     @ApiOperation(value="通过订单明细ID删除订单明细信息", notes="通过订单明细ID删除订单明细信息")
-    public ResultUtil deleteMallOrderItemByOrderIds(String[] orderItemIds){
+    public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody String[] orderItemIds){
 
         int i=mallOrderService.deleteMallOrderItemByOrderItemIds(orderItemIds);
         if(i==0){
@@ -136,7 +136,7 @@ public class MallOrderController extends BaseController {
 
     @PostMapping("/deleteMallOrderByOrderIds")
     @ApiOperation(value="通过订单ID删除订单明细信息", notes="通过订单ID删除订单明细信息")
-    public ResultUtil deleteMallOrderByOrderIds(String[] orderIds){
+    public ResultUtil deleteMallOrderByOrderIds(@RequestBody String[] orderIds){
 
         int i=mallOrderService.deleteMallOrderByOrderIds(orderIds);
         if(i==0){
