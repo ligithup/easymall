@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class MallCartController extends BaseController {
     @Autowired
     MallCartService mallCartService;
 
-    @PostMapping("/selectMallCartByUserId")
+    @GetMapping("/selectMallCartByUserId")
     @ApiOperation(value="通过用户ID查询购物车", notes="通过用户ID查询购物车")
     public TableDataInfo selectMallCartByUserId(Integer pageNum, Integer pageSize, String userId){
         startPage();
@@ -40,7 +37,7 @@ public class MallCartController extends BaseController {
         return getDataTable(mallCartList);
     }
 
-    @PostMapping("/insertMallCart")
+    @PostMapping(value = "insertMallCart",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="添加购物车", notes="添加购物车")
     public ResultUtil  insertMallCart(@RequestBody List<MallCartPOJO> mallCartList){
         int i=mallCartService.insertMallCart(mallCartList);
@@ -50,7 +47,7 @@ public class MallCartController extends BaseController {
         return  ResultUtil.success(i);
     }
 
-    @PostMapping("/deleteMallCartByCartIds")
+    @PostMapping(value = "deleteMallCartByCartIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过CartId删除购物车商品", notes="通过CartId删除购物车商品")
     public ResultUtil  deleteMallCartByCartIds(@RequestBody String[] cartIds){
         int i=mallCartService.deleteMallCartByCartIds(cartIds);
@@ -60,7 +57,7 @@ public class MallCartController extends BaseController {
         return  ResultUtil.success(i);
     }
 
-    @PostMapping("/updateMallCartByCartId")
+    @GetMapping("/updateMallCartByCartId")
     @ApiOperation(value="通过CartId修改购物车商品", notes="通过CartId修改购物车商品")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "cartId", value = "cartId", required = false, dataType = "String"),

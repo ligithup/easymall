@@ -2,6 +2,7 @@ package com.easymall.controller;
 
 import com.easymall.base.BaseController;
 import com.easymall.page.TableDataInfo;
+import com.easymall.pojo.LoginVO;
 import com.easymall.pojo.SysUserPOJO;
 import com.easymall.service.SysUserService;
 import com.easymall.util.EncryptUtil;
@@ -11,10 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,9 +30,10 @@ public class SysUserController extends BaseController {
     @Autowired
     SysUserService sysUserService;
 
-    @PostMapping("/addUser")
+
+    @PostMapping(value = "addUser",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="注册用户", notes="注册用户")
-    public ResultUtil addUser(SysUserPOJO sysUserPOJO){
+    public ResultUtil addUser(@RequestBody SysUserPOJO sysUserPOJO){
 
         if(!ObjectUtils.isEmpty(sysUserPOJO)){
             SysUserPOJO user =sysUserService.selectUserByLoginName(sysUserPOJO.getLoginName());
@@ -50,12 +49,17 @@ public class SysUserController extends BaseController {
         return ResultUtil.success();
     }
 
-    @PostMapping("login")
+
+
+    @PostMapping(value = "login",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="用户登录", notes="用户登录")
-    public  ResultUtil  login(String loginName,String password){
-        String md5Password = EncryptUtil.getMD5Str(password);
+    public  ResultUtil  login(@RequestBody LoginVO loginVO){
+        if(loginVO==null||loginVO.getLoginName()==null||loginVO.getPassword()==null){
+            return ResultUtil.result("账号或密码为空");
+        }
+        String md5Password = EncryptUtil.getMD5Str(loginVO.getPassword());
         //MD5加密后和数据库password对比
-        SysUserPOJO user =sysUserService.login(loginName,md5Password);
+        SysUserPOJO user =sysUserService.login(loginVO.getLoginName(),md5Password);
         if(user==null){
            return ResultUtil.result("密码错误");
         }
@@ -63,7 +67,8 @@ public class SysUserController extends BaseController {
         return  ResultUtil.success(user);
     }
 
-    @PostMapping("selectUser")
+
+    @GetMapping("selectUser")
     @ApiOperation(value="查询全部用户", notes="查询全部用户")
     public TableDataInfo selectUser(Integer pageNum, Integer pageSize){
         startPage();
@@ -71,14 +76,14 @@ public class SysUserController extends BaseController {
         return getDataTable(userList);
     }
 
-    @PostMapping("selectUserByLoginName")
+    @GetMapping("selectUserByLoginName")
     @ApiOperation(value="通过登录名查询用户", notes="通过登录名查询用户")
     public  ResultUtil  selectUserByLoginName(String loginName){
         SysUserPOJO user =sysUserService.selectUserByLoginName(loginName);
         return  ResultUtil.success(user);
     }
 
-    @PostMapping("selectUserByUserName")
+    @GetMapping("selectUserByUserName")
     @ApiOperation(value="通过用户名模糊查询用户", notes="通过用户名模糊查询用户")
     public  TableDataInfo  selectUserByUserName(Integer pageNum, Integer pageSize,String userName){
         startPage();
@@ -86,7 +91,8 @@ public class SysUserController extends BaseController {
         return getDataTable(userList);
     }
 
-    @PostMapping("deleteUserByUserId")
+
+    @PostMapping(value = "deleteUserByUserId",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过用户id删除用户", notes="通过用户id删除用户")
     public ResultUtil deleteUserByUserId(@RequestBody String[] userIds){
 

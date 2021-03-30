@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,9 +28,9 @@ public class MallGoodsController extends BaseController {
     @Autowired
     MallGoodsService goodsService;
 
-    @PostMapping("/insertGoods")
+    @PostMapping(value = "insertGoods",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="添加商品", notes="添加商品")
-    public ResultUtil insertGoods(MallGoodsPOJO goodsPOJO){
+    public ResultUtil insertGoods(@RequestBody MallGoodsPOJO goodsPOJO){
         if(ObjectUtils.isEmpty(goodsPOJO)){
             return  ResultUtil.result("不能为空");
         }
@@ -42,9 +39,9 @@ public class MallGoodsController extends BaseController {
         return ResultUtil.success();
     }
 
-    @PostMapping("/updateGoods")
+    @PostMapping(value = "updateGoods",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="修改商品", notes="修改商品")
-    public ResultUtil updateGoods(MallGoodsPOJO goodsPOJO){
+    public ResultUtil updateGoods(@RequestBody MallGoodsPOJO goodsPOJO){
         if(ObjectUtils.isEmpty(goodsPOJO)){
             return  ResultUtil.result("不能为空");
         }
@@ -53,7 +50,7 @@ public class MallGoodsController extends BaseController {
         return ResultUtil.success();
     }
 
-    @PostMapping("/updateGoodsStatus")
+    @GetMapping("/updateGoodsStatus")
     @ApiOperation(value="修改商品状态", notes="修改商品状态")
     public ResultUtil updateGoodsStatus(String goodsId,String status){
 
@@ -62,7 +59,7 @@ public class MallGoodsController extends BaseController {
         return ResultUtil.success();
     }
 
-    @PostMapping("/selectGoods")
+    @GetMapping("/selectGoods")
     @ApiOperation(value="查询全部商品", notes="查询全部商品")
     public TableDataInfo  selectGoods(Integer pageNum, Integer pageSize){
         startPage();
@@ -70,7 +67,7 @@ public class MallGoodsController extends BaseController {
         return getDataTable(goodsList);
     }
 
-    @PostMapping("/selectGoodsByUserId")
+    @GetMapping("/selectGoodsByUserId")
     @ApiOperation(value="通过用户id查询商品", notes="通过用户id查询商品")
     public TableDataInfo  selectGoodsByUserId(Integer pageNum, Integer pageSize,String userId){
         startPage();
@@ -78,7 +75,7 @@ public class MallGoodsController extends BaseController {
         return getDataTable(goodsList);
     }
 
-    @PostMapping("/selectGoodsByGoodsId")
+    @GetMapping("/selectGoodsByGoodsId")
     @ApiOperation(value="通过商品id查询商品", notes="通过商品id查询商品")
     public ResultUtil  selectGoodsByGoodsId(String goodsId){
 
@@ -87,7 +84,7 @@ public class MallGoodsController extends BaseController {
         return ResultUtil.success(goods);
     }
 
-    @PostMapping("/deleteGoodsByGoodsId")
+    @PostMapping(value = "deleteGoodsByGoodsId",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过商品id删除商品", notes="通过商品id删除商品")
     public ResultUtil  deleteGoodsByGoodsId(@RequestBody String[] goodsIds){
 
@@ -98,7 +95,7 @@ public class MallGoodsController extends BaseController {
         return  ResultUtil.success(i);
     }
 
-    @PostMapping("/selectGoodsByGoodsName")
+    @GetMapping("/selectGoodsByGoodsName")
     @ApiOperation(value="通过商品名模糊查询商品", notes="通过商品名模糊查询商品")
     public TableDataInfo  selectGoodsByGoodsName(Integer pageNum, Integer pageSize,String goodsName){
         startPage();

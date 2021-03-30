@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,7 +28,7 @@ public class MallOrderController extends BaseController {
     @Autowired
     MallOrderService mallOrderService;
 
-    @PostMapping("/selectMallOrderAll")
+    @GetMapping("/selectMallOrderAll")
     @ApiOperation(value="查询全部订单信息", notes="查询全部订单信息")
     public TableDataInfo selectMallOrderAll(Integer pageNum, Integer pageSize){
         startPage();
@@ -39,14 +36,14 @@ public class MallOrderController extends BaseController {
         return getDataTable(mallOrderList);
     }
 
-    @PostMapping("/selectMallOrderByUserId")
+    @GetMapping("/selectMallOrderByUserId")
     @ApiOperation(value="通过用户ID查询订单信息", notes="通过用户ID查询订单信息")
     public TableDataInfo selectMallOrderByUserId(Integer pageNum, Integer pageSize,String userId){
         startPage();
         List<MallOrderPOJO> mallOrderList=mallOrderService.selectMallOrderByUserId(userId);
         return getDataTable(mallOrderList);
     }
-    @PostMapping("/selectMallOrderByOrderId")
+    @GetMapping("/selectMallOrderByOrderId")
     @ApiOperation(value="通过订单ID查询订单信息", notes="通过订单ID查询订单信息")
     public ResultUtil selectMallOrderByOrderId(String orderId){
 
@@ -56,7 +53,7 @@ public class MallOrderController extends BaseController {
     }
 
 
-    @PostMapping("/insertMallOrder")
+    @PostMapping(value = "insertMallOrder",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="添加订单信息", notes="添加订单信息")
     public ResultUtil insertMallOrder(@RequestBody List<MallOrderPOJO> mallOrderList){
 
@@ -66,9 +63,9 @@ public class MallOrderController extends BaseController {
         }
         return  ResultUtil.success(i);
     }
-    @PostMapping("/updateMallOrder")
+    @PostMapping(value = "updateMallOrder",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="修改订单信息", notes="修改订单信息")
-    public ResultUtil updateMallOrder(MallOrderPOJO mallOrder){
+    public ResultUtil updateMallOrder(@RequestBody MallOrderPOJO mallOrder){
 
         int i =mallOrderService.updateMallOrder(mallOrder);
         if(i==0){
@@ -78,7 +75,7 @@ public class MallOrderController extends BaseController {
     }
 
 
-    @PostMapping("/selectMallOrderItemByUserId")
+    @GetMapping("/selectMallOrderItemByUserId")
     @ApiOperation(value="通过用户ID查询全部订单明细信息", notes="通过用户ID查询全部订单明细信息")
     public TableDataInfo selectMallOrderItemByUserId(Integer pageNum, Integer pageSize,String userId){
         startPage();
@@ -86,7 +83,7 @@ public class MallOrderController extends BaseController {
         return getDataTable(mallOrderItemList);
     }
 
-    @PostMapping("/selectMallOrderItemByOrderItemId")
+    @GetMapping("/selectMallOrderItemByOrderItemId")
     @ApiOperation(value="通过订单明细ID查询订单明细信息", notes="通过订单明细ID查询订单明细信息")
     public ResultUtil selectMallOrderItemByOrderItemId(String orderItemId){
 
@@ -94,7 +91,7 @@ public class MallOrderController extends BaseController {
         return ResultUtil.success(mallOrderItem);
     }
 
-    @PostMapping("/selectMallOrderItemByOrderId")
+    @GetMapping("/selectMallOrderItemByOrderId")
     @ApiOperation(value="通过订单ID查询订单明细信息", notes="通过订单ID查询订单明细信息")
     public TableDataInfo selectMallOrderItemByOrderId(Integer pageNum, Integer pageSize,String orderId){
         startPage();
@@ -102,7 +99,7 @@ public class MallOrderController extends BaseController {
         return getDataTable(mallOrderItemList);
     }
 
-    @PostMapping("/insertMallOrderItem")
+    @PostMapping(value = "insertMallOrderItem",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="添加订单明细信息", notes="添加订单明细信息")
     public ResultUtil insertMallOrderItem(@RequestBody List<MallOrderItemPOJO> mallOrderItemList){
 
@@ -112,9 +109,9 @@ public class MallOrderController extends BaseController {
         }
         return  ResultUtil.success(i);
     }
-    @PostMapping("/updateMallOrderItem")
+    @PostMapping(value = "updateMallOrderItem",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="修改订单明细信息", notes="修改订单明细信息")
-    public ResultUtil updateMallOrderItem(MallOrderItemPOJO mallOrderItem){
+    public ResultUtil updateMallOrderItem(@RequestBody MallOrderItemPOJO mallOrderItem){
 
         int i =mallOrderService.updateMallOrderItem(mallOrderItem);
         if(i==0){
@@ -123,7 +120,7 @@ public class MallOrderController extends BaseController {
         return  ResultUtil.success(i);
     }
 
-    @PostMapping("/deleteMallOrderItemByOrderItemIds")
+    @PostMapping(value = "deleteMallOrderItemByOrderItemIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单明细ID删除订单明细信息", notes="通过订单明细ID删除订单明细信息")
     public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody String[] orderItemIds){
 
@@ -134,7 +131,7 @@ public class MallOrderController extends BaseController {
         return  ResultUtil.success(i);
     }
 
-    @PostMapping("/deleteMallOrderByOrderIds")
+    @PostMapping(value = "deleteMallOrderByOrderIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单ID删除订单明细信息", notes="通过订单ID删除订单明细信息")
     public ResultUtil deleteMallOrderByOrderIds(@RequestBody String[] orderIds){
 
