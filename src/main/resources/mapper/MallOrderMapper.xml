@@ -110,6 +110,22 @@
 		WHERE order_item_id=#{orderItemId}
 	</select>
 
+	<select id="selectMallOrderItemByGoodsId" resultType="com.easymall.pojo.MallOrderItemPOJO">
+		SELECT
+			order_item_id orderItemId,
+			user_id userId,
+			order_id orderId,
+			goods_id goodsId,
+			current_unit_price currentUnitPrice,
+			quantity quantity,
+			total_price totalPrice,
+			create_time createTime,
+			update_time updateTime
+		FROM
+			mall_order_item
+		WHERE goods_id=#{goodsId}
+	</select>
+
 	<delete id="deleteMallOrderByOrderIds" parameterType="java.lang.String">
 		DELETE  FROM  mall_order
 		WHERE order_id IN

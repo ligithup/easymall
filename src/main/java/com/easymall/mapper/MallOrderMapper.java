@@ -36,4 +36,6 @@ public interface MallOrderMapper {
     MallOrderPOJO selectMallOrderByOrderId(@Param("orderId") String orderId);
 
     MallOrderItemPOJO selectMallOrderItemByOrderItemId(@Param("orderItemId") String orderItemId);
+
+    MallOrderItemPOJO selectMallOrderItemByGoodsId(@Param("goodsId") String goodsId);
 }

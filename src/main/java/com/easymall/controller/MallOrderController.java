@@ -91,6 +91,14 @@ public class MallOrderController extends BaseController {
         return ResultUtil.success(mallOrderItem);
     }
 
+    @GetMapping("/selectMallOrderItemByGoodsId")
+    @ApiOperation(value="通过商品ID查询订单明细信息", notes="通过商品ID查询订单明细信息")
+    public ResultUtil selectMallOrderItemByGoodsId(String goodsId){
+
+        MallOrderItemPOJO mallOrderItem=mallOrderService.selectMallOrderItemByGoodsId(goodsId);
+        return ResultUtil.success(mallOrderItem);
+    }
+
     @GetMapping("/selectMallOrderItemByOrderId")
     @ApiOperation(value="通过订单ID查询订单明细信息", notes="通过订单ID查询订单明细信息")
     public TableDataInfo selectMallOrderItemByOrderId(Integer pageNum, Integer pageSize,String orderId){

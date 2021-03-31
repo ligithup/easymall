@@ -82,4 +82,9 @@ public class MallOrderService {
 
         return mallOrderMapper.selectMallOrderItemByOrderItemId(orderItemId);
     }
+
+    public MallOrderItemPOJO selectMallOrderItemByGoodsId(String goodsId) {
+
+        return mallOrderMapper.selectMallOrderItemByGoodsId(goodsId);
+    }
 }
