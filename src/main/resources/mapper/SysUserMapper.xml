@@ -17,7 +17,7 @@
 			remark
 		  FROM
 			sys_user
-		  WHERE login_name=#{loginName} AND  password=#{password} limit 1
+		  WHERE login_name=#{loginName} AND  password=#{password} AND user_type=#{userType} limit 1
 	</select>
 
 	<select id="selectUserByLoginName" resultType="com.easymall.pojo.SysUserPOJO">

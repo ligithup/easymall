@@ -22,9 +22,9 @@ public class SysUserService {
         sysUserMapper.addUser(sysUserPOJO);
     }
 
-    public SysUserPOJO login(String loginName, String password) {
+    public SysUserPOJO login(String loginName, String password,String userType) {
 
-        return sysUserMapper.login(loginName,password);
+        return sysUserMapper.login(loginName,password,userType);
     }
 
     public List<SysUserPOJO> selectUser() {

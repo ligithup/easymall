@@ -59,7 +59,7 @@ public class SysUserController extends BaseController {
         }
         String md5Password = EncryptUtil.getMD5Str(loginVO.getPassword());
         //MD5加密后和数据库password对比
-        SysUserPOJO user =sysUserService.login(loginVO.getLoginName(),md5Password);
+        SysUserPOJO user =sysUserService.login(loginVO.getLoginName(),md5Password,loginVO.getUserType());
         if(user==null){
            return ResultUtil.result("密码错误");
         }

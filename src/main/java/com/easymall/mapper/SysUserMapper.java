@@ -14,7 +14,7 @@ public interface SysUserMapper {
 
      void addUser(SysUserPOJO sysUserPOJO);
 
-     SysUserPOJO login(@Param("loginName") String loginName,@Param("password") String password);
+     SysUserPOJO login(@Param("loginName") String loginName,@Param("password") String password,@Param("userType") String userType);
 
      List<SysUserPOJO> selectUser();
 
