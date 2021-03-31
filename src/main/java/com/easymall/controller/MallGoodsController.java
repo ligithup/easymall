@@ -69,9 +69,9 @@ public class MallGoodsController extends BaseController {
 
     @GetMapping("/selectGoodsByUserId")
     @ApiOperation(value="通过用户id查询商品", notes="通过用户id查询商品")
-    public TableDataInfo  selectGoodsByUserId(Integer pageNum, Integer pageSize,String userId){
+    public TableDataInfo  selectGoodsByUserId(Integer pageNum, Integer pageSize,String userId,String status){
         startPage();
-        List<MallGoodsPOJO> goodsList= goodsService.selectGoodsByUserId(userId);
+        List<MallGoodsPOJO> goodsList= goodsService.selectGoodsByUserId(userId,status);
         return getDataTable(goodsList);
     }
 

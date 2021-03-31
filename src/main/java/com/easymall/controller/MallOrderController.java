@@ -57,10 +57,10 @@ public class MallOrderController extends BaseController {
     @ApiOperation(value="添加订单信息", notes="添加订单信息")
     public ResultUtil insertMallOrder(@RequestBody List<MallOrderPOJO> mallOrderList){
 
-        int i =mallOrderService.insertMallOrder(mallOrderList);
-        if(i==0){
-            return  ResultUtil.result("添加失败");
-        }
+       List<MallOrderPOJO> i =mallOrderService.insertMallOrder(mallOrderList);
+//        if(i==0){
+//            return  ResultUtil.result("添加失败");
+//        }
         return  ResultUtil.success(i);
     }
     @PostMapping(value = "updateMallOrder",produces ="application/json;charset=utf-8" )

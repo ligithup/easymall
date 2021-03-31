@@ -136,11 +136,11 @@
              WHERE  order_item_id=#{orderItemId}
 	</update>
 
-	<insert id="insertMallOrder" parameterType="list">
+	<insert id="insertMallOrder" parameterType="list" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO mall_order (order_id, user_id,  payment, payment_type,postage,status,payment_time,send_time,end_time,close_time, create_time, update_time)
 		VALUES
 		<foreach collection="list" separator="," item="info">
-			(UUID(), #{info.userId},  #{info.payment}, #{info.paymentType}, #{info.postage}, #{info.status}, #{info.paymentTime}, #{info.sendTime}, #{info.endTime}, #{info.closeTime}, NOW(), NOW())
+			(#{info.orderId}, #{info.userId},  #{info.payment}, #{info.paymentType}, #{info.postage}, #{info.status}, #{info.paymentTime}, #{info.sendTime}, #{info.endTime}, #{info.closeTime}, NOW(), NOW())
 		</foreach>
 	</insert>
 

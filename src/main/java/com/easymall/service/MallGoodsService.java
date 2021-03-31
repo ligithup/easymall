@@ -26,10 +26,10 @@ public class MallGoodsService {
         return  goodsMapper.selectGoods();
     }
 
-    public List<MallGoodsPOJO> selectGoodsByUserId(String userId) {
+    public List<MallGoodsPOJO> selectGoodsByUserId(String userId,String status) {
 
 
-        return  goodsMapper.selectGoodsByUserId(userId);
+        return  goodsMapper.selectGoodsByUserId(userId,status);
     }
 
     public void updateGoods(MallGoodsPOJO goodsPOJO) {

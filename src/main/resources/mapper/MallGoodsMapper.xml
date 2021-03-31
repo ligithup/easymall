@@ -62,6 +62,7 @@
 		FROM
 			mall_goods
 		WHERE user_id=#{userId}
+		<if test="status != null"> and status = #{status} </if>
 	</select>
 
 

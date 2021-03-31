@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author liweijun
@@ -39,9 +40,12 @@ public class MallOrderService {
         return mallOrderMapper.selectMallOrderItemByOrderId(orderId);
     }
 
-    public int insertMallOrder(List<MallOrderPOJO> mallOrderList) {
-
-        return mallOrderMapper.insertMallOrder(mallOrderList);
+    public List<MallOrderPOJO> insertMallOrder(List<MallOrderPOJO> mallOrderList) {
+        for (MallOrderPOJO mallOrderPOJO : mallOrderList) {
+            mallOrderPOJO.setOrderId(UUID.randomUUID().toString());
+        }
+        int i = mallOrderMapper.insertMallOrder(mallOrderList);
+        return mallOrderList;
     }
 
     public int insertMallOrderItem(List<MallOrderItemPOJO> mallOrderItemList) {
