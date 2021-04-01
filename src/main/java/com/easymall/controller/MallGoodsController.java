@@ -86,9 +86,9 @@ public class MallGoodsController extends BaseController {
 
     @PostMapping(value = "deleteGoodsByGoodsId",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过商品id删除商品", notes="通过商品id删除商品")
-    public ResultUtil  deleteGoodsByGoodsId(@RequestBody String[] goodsIds){
-
-        int i=goodsService.deleteGoodsByGoodsId(goodsIds);
+    public ResultUtil  deleteGoodsByGoodsId(@RequestBody String goodsIds){
+        String[] split = goodsIds.split(",");
+        int i=goodsService.deleteGoodsByGoodsId(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }

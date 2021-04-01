@@ -130,9 +130,9 @@ public class MallOrderController extends BaseController {
 
     @PostMapping(value = "deleteMallOrderItemByOrderItemIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单明细ID删除订单明细信息", notes="通过订单明细ID删除订单明细信息")
-    public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody String[] orderItemIds){
-
-        int i=mallOrderService.deleteMallOrderItemByOrderItemIds(orderItemIds);
+    public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody String orderItemIds){
+        String[] split = orderItemIds.split(",");
+        int i=mallOrderService.deleteMallOrderItemByOrderItemIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }
@@ -141,9 +141,9 @@ public class MallOrderController extends BaseController {
 
     @PostMapping(value = "deleteMallOrderByOrderIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单ID删除订单明细信息", notes="通过订单ID删除订单明细信息")
-    public ResultUtil deleteMallOrderByOrderIds(@RequestBody String[] orderIds){
-
-        int i=mallOrderService.deleteMallOrderByOrderIds(orderIds);
+    public ResultUtil deleteMallOrderByOrderIds(@RequestBody String orderIds){
+        String[] split = orderIds.split(",");
+        int i=mallOrderService.deleteMallOrderByOrderIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }

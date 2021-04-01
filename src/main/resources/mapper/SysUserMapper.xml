@@ -91,4 +91,10 @@
 	</delete>
 
 
+	<update id="updateUserByUserId" parameterType="com.easymall.pojo.SysUserPOJO">
+		      UPDATE sys_user SET login_name=#{loginName},user_name=#{userName},sex=#{sex},user_type=#{userType},email=#{email},phone=#{phone},status=#{status},remark=#{remark},update_time=NOW()
+             WHERE  user_id=#{userId}
+
+	</update>
+
 </mapper>

@@ -47,4 +47,9 @@ public class SysUserService {
 
         return sysUserMapper.deleteUserByUserId(userIds);
     }
+
+    public int updateUserByUserId(SysUserPOJO sysUserPOJO) {
+
+        return  sysUserMapper.updateUserByUserId(sysUserPOJO);
+    }
 }

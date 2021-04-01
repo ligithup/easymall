@@ -24,4 +24,5 @@ public interface SysUserMapper {
 
      int deleteUserByUserId(String[] userIds);
 
+    int updateUserByUserId(SysUserPOJO sysUserPOJO);
 }

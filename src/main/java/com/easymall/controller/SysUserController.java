@@ -92,16 +92,26 @@ public class SysUserController extends BaseController {
     }
 
 
-    @PostMapping(value = "deleteUserByUserId",produces ="application/json;charset=utf-8" )
+    @PostMapping(value = "deleteUserByUserId" ,produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过用户id删除用户", notes="通过用户id删除用户")
-    public ResultUtil deleteUserByUserId(@RequestBody String[] userIds){
-
-        int i= sysUserService.deleteUserByUserId(userIds);
+    public ResultUtil deleteUserByUserId(@RequestBody String  userIds){
+        String[] split = userIds.split(",");
+        int i= sysUserService.deleteUserByUserId(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }
         return  ResultUtil.success(i);
     }
 
+    @PostMapping(value = "updateUserByUserId",produces ="application/json;charset=utf-8" )
+    @ApiOperation(value="通过UserId修改用户信息", notes="通过UserId修改用户信息")
+    public ResultUtil updateUserByUserId(@RequestBody SysUserPOJO sysUserPOJO){
+
+        int i=sysUserService.updateUserByUserId(sysUserPOJO);
+        if(i==0){
+            return  ResultUtil.result("修改失败");
+        }
+        return  ResultUtil.success(i);
+    }
 
 }

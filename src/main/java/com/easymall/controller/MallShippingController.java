@@ -46,9 +46,9 @@ public class MallShippingController extends BaseController {
 
     @PostMapping(value = "deleteMallShippingByShipId",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过shipId删除收货地址", notes="通过shipId删除收货地址")
-    public ResultUtil deleteMallShippingByShipIds(@RequestBody String[] shipIds){
-
-        int i=mallShippingService.deleteMallShippingByShipIds(shipIds);
+    public ResultUtil deleteMallShippingByShipIds(@RequestBody String shipIds){
+        String[] split = shipIds.split(",");
+        int i=mallShippingService.deleteMallShippingByShipIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }

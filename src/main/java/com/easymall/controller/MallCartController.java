@@ -49,8 +49,9 @@ public class MallCartController extends BaseController {
 
     @PostMapping(value = "deleteMallCartByCartIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过CartId删除购物车商品", notes="通过CartId删除购物车商品")
-    public ResultUtil  deleteMallCartByCartIds(@RequestBody String[] cartIds){
-        int i=mallCartService.deleteMallCartByCartIds(cartIds);
+    public ResultUtil  deleteMallCartByCartIds(@RequestBody String cartIds){
+        String[] split = cartIds.split(",");
+        int i=mallCartService.deleteMallCartByCartIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
         }
