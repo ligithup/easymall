@@ -2,6 +2,7 @@ package com.easymall.controller;
 
 import com.easymall.base.BaseController;
 import com.easymall.page.TableDataInfo;
+import com.easymall.pojo.GoodsIds;
 import com.easymall.pojo.MallGoodsPOJO;
 import com.easymall.service.MallGoodsService;
 import com.easymall.util.ResultUtil;
@@ -84,10 +85,10 @@ public class MallGoodsController extends BaseController {
         return ResultUtil.success(goods);
     }
 
-    @PostMapping(value = "deleteGoodsByGoodsId",produces ="application/json;charset=utf-8" )
+    @PostMapping(value = "deleteGoodsByGoodsId" ,produces ="application/json;charset=utf-8")
     @ApiOperation(value="通过商品id删除商品", notes="通过商品id删除商品")
-    public ResultUtil  deleteGoodsByGoodsId(@RequestBody String goodsIds){
-        String[] split = goodsIds.split(",");
+    public ResultUtil  deleteGoodsByGoodsId(@RequestBody GoodsIds goodsIds){
+        String[] split = goodsIds.getGoodsIds().split(",");
         int i=goodsService.deleteGoodsByGoodsId(split);
         if(i==0){
             return  ResultUtil.result("删除失败");

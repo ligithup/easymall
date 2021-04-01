@@ -4,6 +4,7 @@ import com.easymall.base.BaseController;
 import com.easymall.page.TableDataInfo;
 import com.easymall.pojo.LoginVO;
 import com.easymall.pojo.SysUserPOJO;
+import com.easymall.pojo.UserIds;
 import com.easymall.service.SysUserService;
 import com.easymall.util.EncryptUtil;
 import com.easymall.util.ResultUtil;
@@ -94,8 +95,8 @@ public class SysUserController extends BaseController {
 
     @PostMapping(value = "deleteUserByUserId" ,produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过用户id删除用户", notes="通过用户id删除用户")
-    public ResultUtil deleteUserByUserId(@RequestBody String  userIds){
-        String[] split = userIds.split(",");
+    public ResultUtil deleteUserByUserId(@RequestBody UserIds userIds){
+        String[] split = userIds.getUserIds().split(",");
         int i= sysUserService.deleteUserByUserId(split);
         if(i==0){
             return  ResultUtil.result("删除失败");

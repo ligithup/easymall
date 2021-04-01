@@ -4,6 +4,8 @@ import com.easymall.base.BaseController;
 import com.easymall.page.TableDataInfo;
 import com.easymall.pojo.MallOrderItemPOJO;
 import com.easymall.pojo.MallOrderPOJO;
+import com.easymall.pojo.OrderIds;
+import com.easymall.pojo.OrderItemIds;
 import com.easymall.service.MallOrderService;
 import com.easymall.util.ResultUtil;
 import io.swagger.annotations.Api;
@@ -130,8 +132,8 @@ public class MallOrderController extends BaseController {
 
     @PostMapping(value = "deleteMallOrderItemByOrderItemIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单明细ID删除订单明细信息", notes="通过订单明细ID删除订单明细信息")
-    public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody String orderItemIds){
-        String[] split = orderItemIds.split(",");
+    public ResultUtil deleteMallOrderItemByOrderIds(@RequestBody OrderItemIds orderItemIds){
+        String[] split = orderItemIds.getOrderItemIds().split(",");
         int i=mallOrderService.deleteMallOrderItemByOrderItemIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
@@ -141,8 +143,8 @@ public class MallOrderController extends BaseController {
 
     @PostMapping(value = "deleteMallOrderByOrderIds",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="通过订单ID删除订单明细信息", notes="通过订单ID删除订单明细信息")
-    public ResultUtil deleteMallOrderByOrderIds(@RequestBody String orderIds){
-        String[] split = orderIds.split(",");
+    public ResultUtil deleteMallOrderByOrderIds(@RequestBody OrderIds orderIds){
+        String[] split = orderIds.getOrderIds().split(",");
         int i=mallOrderService.deleteMallOrderByOrderIds(split);
         if(i==0){
             return  ResultUtil.result("删除失败");
