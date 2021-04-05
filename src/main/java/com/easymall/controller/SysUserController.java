@@ -4,6 +4,7 @@ import com.easymall.base.BaseController;
 import com.easymall.page.TableDataInfo;
 import com.easymall.pojo.LoginVO;
 import com.easymall.pojo.SysUserPOJO;
+import com.easymall.pojo.UserIdStatus;
 import com.easymall.pojo.UserIds;
 import com.easymall.service.SysUserService;
 import com.easymall.util.EncryptUtil;
@@ -115,4 +116,14 @@ public class SysUserController extends BaseController {
         return  ResultUtil.success(i);
     }
 
+    @PostMapping(value = "updateUserStatusByUserId",produces ="application/json;charset=utf-8" )
+    @ApiOperation(value="通过UserId修改用户Status", notes="通过UserId修改用户Status")
+    public ResultUtil updateUserStatusByUserId(@RequestBody UserIdStatus userIdStatus){
+
+        int i=sysUserService.updateUserStatusByUserId(userIdStatus);
+        if(i==0){
+            return  ResultUtil.result("修改失败");
+        }
+        return  ResultUtil.success(i);
+    }
 }

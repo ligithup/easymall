@@ -2,6 +2,7 @@ package com.easymall.service;
 
 import com.easymall.mapper.SysUserMapper;
 import com.easymall.pojo.SysUserPOJO;
+import com.easymall.pojo.UserIdStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -51,5 +52,9 @@ public class SysUserService {
     public int updateUserByUserId(SysUserPOJO sysUserPOJO) {
 
         return  sysUserMapper.updateUserByUserId(sysUserPOJO);
+    }
+
+    public int updateUserStatusByUserId(UserIdStatus userIdStatus) {
+        return  sysUserMapper.updateUserStatusByUserId(userIdStatus);
     }
 }

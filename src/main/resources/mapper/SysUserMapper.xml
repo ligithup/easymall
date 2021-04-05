@@ -97,4 +97,10 @@
 
 	</update>
 
+	<update id="updateUserStatusByUserId" parameterType="com.easymall.pojo.UserIdStatus">
+		      UPDATE sys_user SET status=#{status},update_time=NOW()
+             WHERE  user_id=#{userId}
+
+	</update>
+
 </mapper>

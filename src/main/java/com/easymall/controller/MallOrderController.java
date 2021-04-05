@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,9 +58,11 @@ public class MallOrderController extends BaseController {
 
     @PostMapping(value = "insertMallOrder",produces ="application/json;charset=utf-8" )
     @ApiOperation(value="添加订单信息", notes="添加订单信息")
-    public ResultUtil insertMallOrder(@RequestBody List<MallOrderPOJO> mallOrderList){
+    public ResultUtil insertMallOrder(@RequestBody MallOrderPOJO mallOrderList){
 
-       List<MallOrderPOJO> i =mallOrderService.insertMallOrder(mallOrderList);
+        List<MallOrderPOJO> list = new ArrayList<>();
+        list.add(mallOrderList);
+        List<MallOrderPOJO> i =mallOrderService.insertMallOrder(list);
 //        if(i==0){
 //            return  ResultUtil.result("添加失败");
 //        }

@@ -1,6 +1,7 @@
 package com.easymall.mapper;
 
 import com.easymall.pojo.SysUserPOJO;
+import com.easymall.pojo.UserIdStatus;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface SysUserMapper {
      int deleteUserByUserId(String[] userIds);
 
     int updateUserByUserId(SysUserPOJO sysUserPOJO);
+
+    int updateUserStatusByUserId(UserIdStatus userIdStatus);
+
 }
