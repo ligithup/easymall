@@ -14,7 +14,7 @@ public interface MallGoodsMapper {
 
     void insertGoods(MallGoodsPOJO goodsPOJO);
 
-    List<MallGoodsPOJO> selectGoods();
+    List<MallGoodsPOJO> selectGoods(@Param("status") String status);
 
     List<MallGoodsPOJO> selectGoodsByUserId(@Param("userId") String userId,@Param("status") String status);
 

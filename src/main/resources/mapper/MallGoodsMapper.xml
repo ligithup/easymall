@@ -39,6 +39,7 @@
 			user_id userId
 		FROM
 			mall_goods
+		<if test="status != null and status !=''"> where status = #{status} </if>
 	</select>
 
 
@@ -62,7 +63,7 @@
 		FROM
 			mall_goods
 		WHERE user_id=#{userId}
-		<if test="status != null"> and status = #{status} </if>
+		<if test="status != null and status !=''"> and status = #{status} </if>
 	</select>
 
 

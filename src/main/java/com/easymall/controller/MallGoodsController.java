@@ -61,10 +61,10 @@ public class MallGoodsController extends BaseController {
     }
 
     @GetMapping("/selectGoods")
-    @ApiOperation(value="查询全部商品", notes="查询全部商品")
-    public TableDataInfo  selectGoods(Integer pageNum, Integer pageSize){
+    @ApiOperation(value="查询全商品(status为空查询全部状态)", notes="查询全商品(status为空查询全部状态)")
+    public TableDataInfo  selectGoods(Integer pageNum, Integer pageSize,String status){
         startPage();
-        List<MallGoodsPOJO> goodsList= goodsService.selectGoods();
+        List<MallGoodsPOJO> goodsList= goodsService.selectGoods(status);
         return getDataTable(goodsList);
     }
 

@@ -22,8 +22,8 @@ public class MallGoodsService {
         goodsMapper.insertGoods(goodsPOJO);
     }
 
-    public List<MallGoodsPOJO> selectGoods() {
-        return  goodsMapper.selectGoods();
+    public List<MallGoodsPOJO> selectGoods(String status) {
+        return  goodsMapper.selectGoods(status);
     }
 
     public List<MallGoodsPOJO> selectGoodsByUserId(String userId,String status) {
